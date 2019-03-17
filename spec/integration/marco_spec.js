@@ -8,14 +8,13 @@ describe("routes : marco", () => {
   describe("GET /", () => {
 
 //#2
-    it("should return status code 200", (done) => {
+    it("should return status code 200", () => {
 
 //#3
       request.get(base, (err, res, body) => {
         expect(res.statusCode).toBe(200);
 
-//#4
-        done();
+done();
       });
     });
 
