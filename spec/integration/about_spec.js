@@ -7,7 +7,7 @@ describe("routes : about", () => {
   describe("GET /", () => {
 
 //#2
-it("should return status code 200 and have 'About Us' in the body of the response", () => {
+it("should return status code 200 and have 'About Us' in the body of the response", (done) => {
 
 //#3
    request.get(base, (err, res, body) => {

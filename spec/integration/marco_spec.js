@@ -8,7 +8,7 @@ describe("routes : marco", () => {
   describe("GET /", () => {
 
 //#2
-    it("should return status code 200", () => {
+    it("should return status code 200", (done) => {
 
 //#3
       request.get(base, (err, res, body) => {
