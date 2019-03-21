@@ -1,6 +1,5 @@
 const topicQueries = require("../db/queries.topics.js");
-const sequelize = require("../../src/db/models/index").sequelize;
- const Topic = require("../../src/db/models").Topic;
+
  module.exports = {
    index(req, res, next){
 
