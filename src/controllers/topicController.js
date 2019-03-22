@@ -8,7 +8,7 @@ module.exports = {
         res.render("topics/index", {topics});
       }
     })
-  };
+  },
   create(req, res, next){
     let newTopic = {
       title: req.body.title,
@@ -21,10 +21,10 @@ module.exports = {
         res.redirect(303, `/topics/${topic.id}`);
       }
     });
-  };
+  },
   new(req, res, next){
     res.render("topics/new");
-  };
+  },
   show(req, res, next){
     topicQueries.getTopic(req.params.id, (err, topic) => {
       if(err || topic == null){
@@ -33,7 +33,7 @@ module.exports = {
           res.render("topics/show", {topic});
         }
       });
-    };
+    },
     edit(req, res, next){
       topicQueries.getTopic(req.params.id, (err, topic) => {
         if(err || topic == null){
@@ -42,7 +42,7 @@ module.exports = {
           res.render("topics/edit", {topic});
         }
       });
-    };
+    },
     update(req, res, next){
       topicQueries.updateTopic(req.params.id, req.body, (err, topic) => {
 

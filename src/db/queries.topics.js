@@ -10,7 +10,7 @@ module.exports = {
     .catch((err) => {
       callback(err);
     })
-  };
+  },
   getAllTopics(callback){
     return Topic.all()
    .then((topics) => {
@@ -19,7 +19,7 @@ module.exports = {
    .catch((err) => {
      callback(err);
    })
- };
+ },
   addTopic(newTopic, callback){
        return Topic.create({
          title: newTopic.title,
@@ -31,7 +31,7 @@ module.exports = {
        .catch((err) => {
          callback(err);
        })
-     };
+     },
   deleteTopic(id, callback){
           return Topic.destroy({
             where: {id}
@@ -42,7 +42,7 @@ module.exports = {
           .catch((err) => {
             callback(err);
           })
-        };
+        },
   destroy(req, res, next){
             topicQueries.deleteTopic(req.params.id, (err, topic) => {
               if(err){
@@ -51,7 +51,7 @@ module.exports = {
                 res.redirect(303, "/topics")
               }
             });
-          };
+          },
   updateTopic(id, updatedTopic, callback){
     return Topic.findById(id)
     .then((topic) => {
@@ -70,4 +70,5 @@ module.exports = {
         callback(err);
       });
     });
-  };
+  }
+}
