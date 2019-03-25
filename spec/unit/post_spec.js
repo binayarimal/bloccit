@@ -37,8 +37,7 @@ describe("Post", () => {
   });
   describe("#create()", () => {
      it("should create a post object with a title, body, and assigned topic", (done) => {
-
-       Post.create({
+  Post.create({
          title: "Pros of Cryosleep during the long journey",
          body: "1. Not having to answer the 'are we there yet?' question.",
          topicId: this.topic.id
@@ -71,7 +70,7 @@ describe("Post", () => {
            })
          });
    });
-   describe("#setTopic()", () => {
+  describe("#setTopic()", () => {
 
     it("should associate a topic and a post together", (done) => {
 
@@ -96,28 +95,16 @@ describe("Post", () => {
     });
 
   });
-  describe("#setTopic()", () => {
+  describe("#getTopic()", () => {
 
-    it("should associate a topic and a post together", (done) => {
+    it("should return the associated topic", (done) => {
 
-// #1
-      Topic.create({
-        title: "Challenges of interstellar travel",
-        description: "1. The Wi-Fi is terrible"
-      })
-      .then((newTopic) => {
+      this.post.getTopic()
+      .then((associatedTopic) => {
+        expect(associatedTopic.title).toBe("Expeditions to Alpha Centauri");
+        done();
+      });
 
-// #2
-        expect(this.post.topicId).toBe(this.topic.id);
-// #3
-        this.post.setTopic(newTopic)
-        .then((post) => {
-// #4
-          expect(post.topicId).toBe(newTopic.id);
-          done();
-
-        });
-      })
     });
 
   });
