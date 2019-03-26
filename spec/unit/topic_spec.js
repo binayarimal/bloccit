@@ -55,7 +55,7 @@ describe("Topic", () => {
        });
      });
    });
-   describe("#setPost()", () => {
+   describe("#getPost()", () => {
 
      it("should associate a topic and a post together", (done) => {
 
@@ -65,25 +65,20 @@ describe("Topic", () => {
          body: "1. The Wi-Fi is terrible",
          topicId:this.topic.id
        })
-       .then((newPost) => {
+           .then((post) => {
 
-   // #2
-         expect(this.topic.id).toBe(this.post.topicId);
+             expect(post.topicId).toBe(this.topic.id);
+             done();
 
-         this.topic.setPost(newPost)
-         .then((topic) => {
- // #4
-           expect(topic.id).toBe(newPost.topicId);
-           done();
-
-         });
-   // #3
-
-         });
+           });
        })
-       })
+    
+
+
+
 
 
 
 
  })
+})
