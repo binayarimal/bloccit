@@ -72,13 +72,19 @@ describe("Topic", () => {
 
            });
        })
-    
+       it("should return the associated topic", (done) => {
 
+         this.post.getPosts()
+         .then((associatedTopic) => {
+           expect(Array.isArray(associatedTopic)).toBe(true);
+           done();
+         });
 
+       });
+       });
 
 
 
 
 
  })
-})
