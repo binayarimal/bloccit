@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Post.associate = function(models) {
     // associations can be defined here
+    Post.hasMany(models.Flair, {
+      foreignKey: "postId",
+      as: "flairs"
+    });
     Post.belongsTo(models.Topic, {
        foreignKey: "topicId",
        onDelete: "CASCADE"
