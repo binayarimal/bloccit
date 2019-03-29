@@ -58,26 +58,12 @@ describe("Topic", () => {
 
     it("should associate a topic and a post together", (done) => {
 
-      Post.create({
-        title: "Challenges of interstellar travel",
-        body: "1. The Wi-Fi is terrible",
-        topicId:this.topic.id
-      })
 
-      .then((newPost) => {
-        expect(newPost.topicId).toBe(this.topic.id);
-        newPost.setTopic(this.topic)
-        .then((post) => {
-          // #4
-          expect(post.topicId).toBe(this.topic.id);
           this.topic.getPosts()
           .then((associatedPosts) => {
             expect(associatedPosts[0].title).toBe("My first visit to Proxima Centauri b"
           );
-          expect(associatedPosts[1].title).toBe("Challenges of interstellar travel")
 
-          done();
-        });
         done();
 
       });
@@ -85,4 +71,3 @@ describe("Topic", () => {
 
   });
 });
-})
