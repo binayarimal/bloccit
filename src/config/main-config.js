@@ -10,9 +10,7 @@ module.exports = {
     app.set("views", viewsFolder);
     app.set("view engine", "ejs");
     app.use(express.static(path.join(__dirname, "..", "assets")));
-
     app.use(bodyParser.urlencoded({ extended: true }));
-    app.use(expressValidator());
     app.use(session({
       secret: process.env.cookieSecret,
       resave: false,
@@ -20,5 +18,6 @@ module.exports = {
       cookie: { maxAge: 60000 }
     }));
     app.use(flash());
+    app.use(expressValidator());
   }
 };
