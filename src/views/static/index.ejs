@@ -3,13 +3,13 @@
    <% include ./partials/head.ejs %>
   </head>
   <body>
-
+ <% include ./partials/messages.ejs %>
       <!-- Navigation -->
-     <% include ./partials/navbar.ejs %>
+
 
       <!-- Page Content -->
       <main class="container">
-
+   <% include ./partials/navbar.ejs %>
         <!-- Jumbotron Header -->
         <header class="jumbotron my-4">
           <h1 class="display-3">Welcome to Bloccit</h1>
@@ -41,7 +41,7 @@
       </main>
       <!-- /.container -->
 
-       
+
        <% include ./partials/baseScripts.ejs %>
     </body>
 </html>
