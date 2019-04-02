@@ -3,6 +3,8 @@ const server = require("../../src/server");
 const base = "http://localhost:3000/topics/";
 const sequelize = require("../../src/db/models/index").sequelize;
 const Topic = require("../../src/db/models").Topic;
+const User = require("../../src/db/models").User;
+
 describe("routes : topics", () => {
   beforeEach((done) => {
     this.topic;
@@ -24,6 +26,32 @@ describe("routes : topics", () => {
     });
 
   });
+  describe("admin user performing CRUD actions for Topic", () => {
+
+// #2: // before each test in admin user context, send an authentication request
+       // to a route we will create to mock an authentication request
+     beforeEach((done) => {
+       User.create({
+         email: "admin@example.com",
+         password: "123456",
+         role: "admin"
+       })
+       .then((user) => {
+         request.get({         // mock authentication
+           url: "http://localhost:3000/auth/fake",
+           form: {
+             role: user.role,     // mock authenticate as admin user
+             userId: user.id,
+             email: user.email
+           }
+         },
+           (err, res, body) => {
+             done();
+           }
+         );
+       });
+     });
+
   describe("GET /topics", () => {
    it("should return a status code 200 and all topics", (done) => {
       request.get(base, (err, res, body) => {
@@ -178,6 +206,6 @@ describe("routes : topics", () => {
       });
 
   })
-
+})
   })
 });
