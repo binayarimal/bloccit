@@ -49,15 +49,15 @@ module.exports = {
        },
        destroy(req, res, next){
 
-       // #1
-           topicQueries.deleteTopic(req, (err, topic) => {
-             if(err){
-               res.redirect(err, `/topics/${req.params.id}`)
-             } else {
-               res.redirect(303, "/topics")
-             }
-           });
-         },
+     // #1
+         topicQueries.deleteTopic(req, (err, topic) => {
+           if(err){
+             res.redirect(err, `/topics/${req.params.id}`)
+           } else {
+             res.redirect(303, "/topics")
+           }
+         });
+       },
   show(req, res, next){
     topicQueries.getTopic(req.params.id, (err, topic) => {
       if(err || topic == null){
