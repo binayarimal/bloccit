@@ -54,7 +54,7 @@ module.exports = {
          callback(err);
        });
      },
-     updatePost(req, updatedTopic, callback){
+     updatePost(req, updatedPost, callback){
 
    // #1
         return Post.findById(req.params.id)

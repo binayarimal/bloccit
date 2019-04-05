@@ -58,7 +58,7 @@ module.exports = {
   edit(req, res, next){
     postQueries.getPost(req.params.id, (err, post) => {
       if(err || post == null){
-        res.redirect(404, "/");
+        res.redirect(500, `/topics/${req.params.topicId}/posts/${req.params.id}`);
       } else {
 
         const authorized = new Authorizer(req.user).create();
@@ -66,7 +66,7 @@ module.exports = {
           res.render("posts/edit", {post});
         } else{
           req.flash("You are not authorized to do that.");
-          res.redirect(`/topics/${req.params.id}`)
+          res.redirect(`/topics/${req.params.topicId}/posts/${req.params.id}`)
         }
       }
 
