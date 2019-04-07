@@ -22,6 +22,7 @@ module.exports = {
         userId: req.user.id     };
         postQueries.addPost(newPost, (err, post) => {
           if(err){
+            console.log(err)
             res.redirect(500, `/topics/${newPost.topicId}/posts/new`);
           } else {
             res.redirect(303, `/topics/${newPost.topicId}/posts/${post.id}`);

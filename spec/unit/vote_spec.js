@@ -90,6 +90,30 @@ describe("Vote", () => {
         });
       });
 
+      it("should create an upvote on a post for a user with a val other than 1", (done) => {
+
+  // #3
+        Vote.create({
+          value: 2,
+          postId: this.post.id,
+          userId: this.user.id
+        })
+        .then((vote) => {
+
+  // #4
+
+          expect(vote.value).not.toBe(2);
+          expect(vote.postId).not.toBe(this.post.id);
+          expect(vote.userId).not.toBe(this.user.id);
+          done();
+
+        })
+        .catch((err) => {
+         expect(err).not.toBe(null)
+          done();
+        });
+      });
+
   // #5
       it("should create a downvote on a post for a user", (done) => {
         Vote.create({
@@ -113,6 +137,40 @@ describe("Vote", () => {
   // #6
       it("should not create a vote without assigned post or user", (done) => {
         Vote.create({
+          value: 1,
+          postId:this.post.id ,
+          userId:this.user.id,
+
+        })
+      .then((vote) => {
+
+          Vote.create({
+            value: 1,
+            postId:vote.postId,
+            userId:vote.userId
+
+          })
+          .then((newVote) =>{
+            console.log(newVote.value);
+            done()
+          })
+        })
+        .catch((err) => {
+
+          expect(err).not.toBe(null);
+
+          done();
+
+        })
+      });
+
+
+
+
+
+
+      it("should not create a vote without assigned post or user", (done) => {
+        Vote.create({
           value: 1
         })
         .then((vote) => {
@@ -133,7 +191,10 @@ describe("Vote", () => {
         })
       });
 
-    });
+})
+
+
+
     describe("#setUser()", () => {
 
      it("should associate a vote and a user together", (done) => {
