@@ -9,11 +9,11 @@ module.exports = {
     const flairRoutes = require("../routes/flairs")
     const userRoutes = require("../routes/users");
     const commentRoutes = require("../routes/comments");
-
+    const voteRoutes = require("../routes/votes");
     if(process.env.NODE_ENV === "test") {
-   const mockAuth = require("../../spec/support/mock-auth.js");
-   mockAuth.fakeIt(app);
- }
+      const mockAuth = require("../../spec/support/mock-auth.js");
+      mockAuth.fakeIt(app);
+    }
     app.use(marco);
     app.use(staticRoutes);
     app.use(userRoutes);
@@ -23,6 +23,7 @@ module.exports = {
     app.use(postRoutes);
     app.use(flairRoutes);
     app.use(commentRoutes);
+    app.use(voteRoutes);
 
 
 

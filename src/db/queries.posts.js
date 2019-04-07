@@ -4,6 +4,7 @@ const Flair = require("./models").Flair
 const Authorizer = require("../policies/application");
 const Comment = require("./models").Comment;
 const User = require("./models").User;
+const Vote = require("./models").Vote;
 
 module.exports = {
   addPost(newPost, callback){
@@ -17,7 +18,11 @@ module.exports = {
   },
   getPost(id, callback){
     return Post.findById(id, {
-      include: [{model: Flair,as: "flairs" }, {model: Comment, as: "comments", include: [{model: User }]  }]
+      include: [
+        {model: Flair,as: "flairs" },
+       {model: Comment, as: "comments", include: [{model: User }]  },
+       {model: Vote, as: "votes"}
+    ]
     })
     .then((post) => {
       callback(null, post);
