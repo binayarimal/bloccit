@@ -4,8 +4,9 @@ const Post = require("../../src/db/models").Post;
 const Comment = require("../../src/db/models").Comment;
 const User = require("../../src/db/models").User;
 const Vote = require("../../src/db/models").Vote;
+const server = require("../../src/server");
 const request = require("request");
-const baseURL = "http://localhost:3000"
+const baseURL = "http://localhost:3000/"
 
 describe("Vote", () => {
 
@@ -123,7 +124,7 @@ describe("Vote", () => {
       })
       .then((vote) => {
 
-        request.get(`${baseURL}${this.topic.id}/posts/${this.post.id}/votes/upvote`)
+        request.get(baseURL+"/topics/"+this.topic.id+"/posts/"+this.post.id+"/votes/upvote")
         .then((err,res,body) =>{
           expect(err).toBeNull();
           Vote.findAll({postId:this.post.id,userId:this.user.id})
@@ -143,7 +144,6 @@ describe("Vote", () => {
 
       })
     });
-
 
     it("should create a downvote on a post for a user", (done) => {
       Vote.create({
