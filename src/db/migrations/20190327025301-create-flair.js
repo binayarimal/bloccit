@@ -10,11 +10,11 @@ module.exports = {
       },
       name: {
           allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       color: {
           allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,

@@ -142,7 +142,7 @@ describe("routes : votes", () => {
               }
             );
           });
-      
+
 
 
         });
@@ -177,5 +177,57 @@ describe("routes : votes", () => {
           });
         });
 
-      }); //end context for signed in user
+      });
+      it("should create an upvote on a post for a user with a val other than 1", (done) => {
+
+        // #3
+        Vote.create({
+          value: 2,
+          postId: this.post.id,
+          userId: this.user.id
+        })
+        .then((vote) => {
+
+          // #4
+
+          expect(vote.value).not.toBe(2);
+          expect(vote.postId).not.toBe(this.post.id);
+          expect(vote.userId).not.toBe(this.user.id);
+          done();
+
+        })
+        .catch((err) => {
+          expect(err).not.toBe(null)
+          done();
+        });
+      });
+      it("should not create a vote twice on the same post", (done) => {
+        Vote.create({
+          value: 1,
+          postId:this.post.id ,
+          userId:this.user.id,
+
+        })
+        .then((vote) => {
+
+          request.get(baseURL+"/topics/"+this.topic.id+"/posts/"+this.post.id+"/votes/upvote")
+          .then((err,res,body) =>{
+            expect(err).toBeNull();
+            Vote.findAll({postId:this.post.id,userId:this.user.id})
+            .then((votes)=> {
+              expect(votes.length).toBe(1);
+              expect(votes[0].value).toBe(1);
+              done();
+            })
+          })
+
+        })
+        .catch((err) => {
+
+          expect(err).not.toBe(null);
+
+          done();
+
+        })
+      });
 });

@@ -11,7 +11,7 @@ module.exports = {
       email: {
         allowNull: false,
         unique: true,
-        
+
         validate: {
           isEmail: { msg: "must be a valid email" }
         },
@@ -19,7 +19,7 @@ module.exports = {
       },
       password: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,
