@@ -24,13 +24,19 @@ module.exports = (sequelize, DataTypes) => {
         as: "flairs"
       });
       Post.hasMany(models.Comment, {
-     foreignKey: "postId",
-     as: "comments"
-   });
-   Post.hasMany(models.Vote, {
-    foreignKey: "postId",
-    as: "votes"
-  });
+        foreignKey: "postId",
+        as: "comments"
+      });
+      Post.hasMany(models.Vote, {
+        foreignKey: "postId",
+        as: "votes"
+      });
+      Post.hasMany(models.Favorite, {
+        foreignKey: "postId",
+        as: "favorites"
+      });
+  
+
       Post.belongsTo(models.Topic, {
         foreignKey: "topicId",
         onDelete: "CASCADE"
@@ -42,27 +48,31 @@ module.exports = (sequelize, DataTypes) => {
     };
     Post.prototype.getPoints = function(){
 
-// #1
-   if(this.votes.length === 0) return 0
+      // #1
+      if(this.votes.length === 0) return 0
 
-// #2
-   return this.votes
-     .map((v) => { return v.value })
-     .reduce((prev, next) => { return prev + next });
- };
- Post.prototype.hasUpvoteFor = function(userId){
-  const vote = this.votes.filter(v => v.userId===userId);
+      // #2
+      return this.votes
+      .map((v) => { return v.value })
+      .reduce((prev, next) => { return prev + next });
+    };
+    Post.prototype.hasUpvoteFor = function(userId){
+      const vote = this.votes.filter(v => v.userId===userId);
 
-  if (vote[0]){
-    if(vote[0].value === 1){return true}
-  }
-  else {return "doesn't have an upVote"}
- };
- Post.prototype.hasDownvoteFor = function(userId){
-  const vote = this.votes.filter(v => v.userId===userId);
-  if (vote[0]){
-    if(vote[0].value === -1){return true}
-    } else {return "doesn't have a downVote"}
- };
+      if (vote[0]){
+        if(vote[0].value === 1){return true}
+      }
+      else {return "doesn't have an upVote"}
+    };
+    Post.prototype.hasDownvoteFor = function(userId){
+      const vote = this.votes.filter(v => v.userId===userId);
+      if (vote[0]){
+        if(vote[0].value === -1){return true}
+      } else {return "doesn't have a downVote"}
+    };
+    Post.prototype.getFavoriteFor = function(userId){
+    return this.favorites.find((favorite) => { return favorite.userId == userId });
+  };
+
     return Post;
   };
