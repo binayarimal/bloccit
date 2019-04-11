@@ -118,6 +118,7 @@ describe("routes : favorites", () => {
          }
        );
      });
+
      describe("POST /topics/:topicId/posts/:postId/favorites/create", () => {
 
        it("should create a favorite", (done) => {
@@ -176,6 +177,7 @@ describe("routes : favorites", () => {
       });
     });
 });
+
 
 });
 
