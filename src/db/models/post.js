@@ -90,6 +90,15 @@ module.exports = (sequelize, DataTypes) => {
     Post.prototype.getFavoriteFor = function(userId){
     return this.favorites.find((favorite) => { return favorite.userId == userId });
   };
+  Post.addScope("lastFiveFor", (userId) => {
+// #2
+    return {
+      where: { userId: userId},
+// #3
+      limit: 5,
+      order: [["createdAt", "DESC"]]
+    }
+  });
 
     return Post;
   };

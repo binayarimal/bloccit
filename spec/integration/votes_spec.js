@@ -226,18 +226,6 @@ describe("#getVote()", () =>{
 
 
     })
-
-
-
-
-
-
-
-
-
-
-
-
     describe("#hasupVote()", () =>{
       it("should return doesn't have upVote", (done) => {
         Post.findOne({
