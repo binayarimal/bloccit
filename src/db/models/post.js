@@ -19,10 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     }, {});
     Post.associate = function(models) {
       // associations can be defined here
-      Post.hasMany(models.Flair, {
-        foreignKey: "postId",
-        as: "flairs"
-      });
+    
       Post.hasMany(models.Comment, {
         foreignKey: "postId",
         as: "comments"
